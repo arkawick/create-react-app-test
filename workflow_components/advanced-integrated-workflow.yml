@@ -78,6 +78,8 @@ jobs:
       continue-on-error: true
 
     - name: Generate Initial ORT Reports
+      env:
+        JAVA_OPTS: "-Xmx3072m"
       run: |
         echo "📊 Stage 1: Generating initial ORT reports..."
 
@@ -92,6 +94,7 @@ jobs:
           -i "$INPUT_FILE" \
           -o ort-results/reporter \
           -f WebApp,StaticHtml,CycloneDx,SpdxDocument
+      continue-on-error: true
 
     # ====== STAGE 2: Policy Compliance Check ======
     - name: Check License Policy Compliance
